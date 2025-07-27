@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIHA", "SIHA.csproj", "{8F1E74EF-6B03-4871-B863-7F348262C047}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "..\TestProject1\TestProject1.csproj", "{270B0453-43AE-4021-9166-B3CC482764DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F1E74EF-6B03-4871-B863-7F348262C047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F1E74EF-6B03-4871-B863-7F348262C047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F1E74EF-6B03-4871-B863-7F348262C047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F1E74EF-6B03-4871-B863-7F348262C047}.Release|Any CPU.Build.0 = Release|Any CPU
+		{270B0453-43AE-4021-9166-B3CC482764DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{270B0453-43AE-4021-9166-B3CC482764DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{270B0453-43AE-4021-9166-B3CC482764DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{270B0453-43AE-4021-9166-B3CC482764DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

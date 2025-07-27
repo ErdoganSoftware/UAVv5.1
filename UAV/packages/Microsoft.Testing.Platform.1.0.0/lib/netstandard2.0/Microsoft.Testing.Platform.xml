@@ -1,0 +1,1877 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Testing.Platform</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Testing.Platform.Builder.TestApplicationBuilder">
+            <summary>
+            A builder for test applications and services.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Extensions.CommandLine.ICommandLineOptionsProvider.ValidateOptionArgumentsAsync(Microsoft.Testing.Platform.Extensions.CommandLine.CommandLineOption,System.String[])">
+            <summary>
+            Validate the arguments for the given command option.
+            </summary>
+            <param name="commandOption">The command option.</param>
+            <param name="arguments">The arguments provided for the command option.</param>
+            <returns>The result of the validation.</returns>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Extensions.CommandLine.ICommandLineOptionsProvider.ValidateCommandLineOptionsAsync(Microsoft.Testing.Platform.CommandLine.ICommandLineOptions)">
+            <summary>
+            Validate that the command line options are valid in the context of each other.
+            </summary>
+            <param name="commandLineOptions">All command line options (including the ones provided by other extensions) are provided.</param>
+            <returns>The result of the validation.</returns>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Extensions.IExtension">
+            <summary>
+            The interface that all extensions must implement. Extensions are a special kind of
+            services that have some identity.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Extensions.IExtension.Uid">
+            <summary>
+            Gets the unique identifier for the extension.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Extensions.IExtension.Version">
+            <summary>
+            Gets the version of the extension (ideally semantic version).
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Extensions.IExtension.DisplayName">
+            <summary>
+            Gets the display name of the extension.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Extensions.IExtension.Description">
+            <summary>
+            Gets the description of the extension.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Extensions.IExtension.IsEnabledAsync">
+            <summary>
+            Controls whether the extension is enabled or not. This is useful for extensions
+            that are always registered but only enabled when certain conditions are met.
+            For example, an extension that would want to be run only when its associated
+            command line option is provided by the user.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Extensions.TestFramework.CloseTestSessionContext">
+            <summary>
+            Context passed to a test framework adapter when <see cref="M:Microsoft.Testing.Platform.Extensions.TestFramework.ITestFramework.CloseTestSessionAsync(Microsoft.Testing.Platform.Extensions.TestFramework.CloseTestSessionContext)"/> is called.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Extensions.TestFramework.CreateTestSessionContext">
+            <summary>
+            Context passed to a test framework adapter when <see cref="M:Microsoft.Testing.Platform.Extensions.TestFramework.ITestFramework.CreateTestSessionAsync(Microsoft.Testing.Platform.Extensions.TestFramework.CreateTestSessionContext)"/> is called.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Extensions.TestFramework.ExecuteRequestContext">
+            <summary>
+            Context passed to a test framework adapter when <see cref="M:Microsoft.Testing.Platform.Extensions.TestFramework.ITestFramework.ExecuteRequestAsync(Microsoft.Testing.Platform.Extensions.TestFramework.ExecuteRequestContext)"/> is called.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Extensions.TestFramework.ITestFramework.CreateTestSessionAsync(Microsoft.Testing.Platform.Extensions.TestFramework.CreateTestSessionContext)">
+            <summary>
+            Ask to the test framework to create a test session.
+            </summary>
+            <param name="context">The test session creation context.</param>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Extensions.TestFramework.ITestFramework.ExecuteRequestAsync(Microsoft.Testing.Platform.Extensions.TestFramework.ExecuteRequestContext)">
+            <summary>
+            Ask to the test framework to execute a test execution request.
+            </summary>
+            <param name="context">The test execution request context.</param>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Extensions.TestFramework.ITestFramework.CloseTestSessionAsync(Microsoft.Testing.Platform.Extensions.TestFramework.CloseTestSessionContext)">
+            <summary>
+            Ask to the test framework to destroy the test session and release all the resources.
+            </summary>
+            <param name="context">The test session destruction context.</param>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.CommandLine.CommandLineParser.Parse(System.String[],Microsoft.Testing.Platform.Helpers.IEnvironment)">
+             <summary>
+             Options parser support:
+                 * Only - and -- prefix for options https://learn.microsoft.com/dotnet/standard/commandline/syntax#options
+                 * Multiple option arguments https://learn.microsoft.com/dotnet/standard/commandline/syntax#multiple-arguments
+                 * Use a space, '=', or ':' as the delimiter between an option name and its argument
+                 * escape with \
+                 * surrounding with ""
+                 * surrounding with ''
+            
+             Options parser doesn't support
+                 * Default argument/commands/verb
+                 * Alias https://learn.microsoft.com/dotnet/standard/commandline/syntax#aliases
+                 * Case sensitivity https://learn.microsoft.com/dotnet/standard/commandline/syntax#case-sensitivity
+                 * -- token https://learn.microsoft.com/dotnet/standard/commandline/syntax#the----token
+            
+             https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_02_03
+             https://learn.microsoft.com/cpp/c-language/parsing-c-command-line-arguments?view=msvc-170
+             Double-Quotes: we don't support for now
+                 * The dollar-sign shall retain its special meaning introducing parameter expansion
+                 * The backquote shall retain its special meaning introducing the other form of command substitution
+                 * A POSIX convention lets you omit the delimiter when you are specifying a single-character option alias, i.e. myapp -vquiet.
+             </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.CommandLine.PlatformCommandLineProvider.Uid">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.CommandLine.PlatformCommandLineProvider.Version">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.CommandLine.PlatformCommandLineProvider.DisplayName">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.CommandLine.PlatformCommandLineProvider.Description">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Testing.Platform.CommandLine.PlatformCommandLineProvider.IsEnabledAsync">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.CommandLine.TreeNodeFilterCommandLineOptionsProvider.Uid">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.CommandLine.TreeNodeFilterCommandLineOptionsProvider.Version">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.CommandLine.TreeNodeFilterCommandLineOptionsProvider.DisplayName">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.CommandLine.TreeNodeFilterCommandLineOptionsProvider.Description">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Testing.Platform.CommandLine.TreeNodeFilterCommandLineOptionsProvider.IsEnabledAsync">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Configurations.JsonConfigurationSource.Uid">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Configurations.JsonConfigurationSource.Version">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Configurations.JsonConfigurationSource.DisplayName">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Configurations.JsonConfigurationSource.Description">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Configurations.JsonConfigurationSource.IsEnabledAsync">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Helpers.ExitCodes">
+            <summary>
+            We use positive exit codes for failure because POSIX/BASH exit codes are unsigned 8-bit integers.
+            On POSIX systems the standard exit code is 0 for success and any number from 1 to 255 for anything else.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Helpers.FNV_1aHashHelper.ComputeStringHash(System.String)">
+            <summary>
+            Computes a hash of the string using the FNV-1a algorithm.
+            Used by Roslyn.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Helpers.ObjectPool`1">
+             <summary>
+             Generic implementation of object pooling pattern with predefined pool size limit. The main
+             purpose is that limited number of frequently used objects can be kept in the pool for
+             further recycling.
+            
+             Notes:
+             1) it is not the goal to keep all returned objects. Pool is not meant for storage. If there
+                is no space in the pool, extra returned objects will be dropped.
+            
+             2) it is implied that if object was obtained from a pool, the caller will return it back in
+                a relatively short time. Keeping checked out objects for long durations is ok, but
+                reduces usefulness of pooling. Just new up your own.
+            
+             Not returning objects to the pool in not detrimental to the pool's work, but is a bad practice.
+             Rationale:
+                If there is no intent for reusing the object, do not use pool - just use "new".
+             </summary>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Helpers.ObjectPool`1.Factory">
+            <remarks>
+            Not using System.Func{T} because this file is linked into the (debugger) Formatter,
+            which does not have that type (since it compiles against .NET 2.0).
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Helpers.ObjectPool`1.Allocate">
+            <summary>
+            Produces an instance.
+            </summary>
+            <remarks>
+            Search strategy is a simple linear probing which is chosen for it cache-friendliness.
+            Note that Free will try to store recycled objects close to the start thus statistically
+            reducing how far we will typically search.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Helpers.ObjectPool`1.Free(`0,System.Threading.CancellationToken)">
+            <summary>
+            Returns objects to the pool.
+            </summary>
+            <remarks>
+            Search strategy is a simple linear probing which is chosen for it cache-friendliness.
+            Note that Free will try to store recycled objects close to the start thus statistically
+            reducing how far we will typically search in Allocate.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Helpers.ObjectPool`1.ForgetTrackedObject(`0,`0)">
+             <summary>
+             Removes an object from leak tracking.
+            
+             This is called when an object is returned to the pool.  It may also be explicitly
+             called if an object allocated from the pool is intentionally not being returned
+             to the pool.  This can be of use with pooled arrays if the consumer wants to
+             return a larger array to the pool than was originally allocated.
+             </summary>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Helpers.IConsole">
+            <summary>
+            Wraps the static System.Console to be isolatable in tests.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Helpers.TimeoutHelper.DefaultHangTimeoutMilliseconds">
+            <summary>
+            Gets defaultAntiHangTimeout* values are used as timeout for every wait operation in the test platform.
+            Are not intended for any timeout logic, but only to avoid infinite waits in case of test platform hangs.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.RoslynDebug.Assert(System.Boolean)">
+            <inheritdoc cref="M:System.Diagnostics.Debug.Assert(System.Boolean)"/>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.RoslynDebug.Assert(System.Boolean,System.String)">
+            <inheritdoc cref="M:System.Diagnostics.Debug.Assert(System.Boolean,System.String)"/>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.RoslynString.IsNullOrEmpty(System.String)">
+            <inheritdoc cref="M:System.String.IsNullOrEmpty(System.String)"/>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.RoslynString.IsNullOrWhiteSpace(System.String)">
+            <inheritdoc cref="M:System.String.IsNullOrWhiteSpace(System.String)"/>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Hosts.ServerTestHost.HandleMessagesAsync">
+            <summary>
+            The main server loop.
+            It receives messages from the client and then runs a corresponding handler.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Hosts.ServerTestHost.RpcInvocationState.CompletionSource">
+            <remarks>
+            For outbound requests, this is populated with the response from the client.
+            For inbound requests, this is set when the invoked request is completed
+            in <see cref="M:Microsoft.Testing.Platform.Hosts.ServerTestHost.HandleRequestAsync(Microsoft.Testing.Platform.ServerMode.RequestMessage,System.Threading.CancellationToken)"/>.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Hosts.ServerTestHost.TestNodeStateChangeAggregator">
+             <summary>
+             Aggregates multiple <see cref="T:Microsoft.Testing.Platform.Extensions.Messages.TestNodeUpdateMessage"/> events
+             into a single <see cref="T:Microsoft.Testing.Platform.ServerMode.TestNodeStateChangedEventArgs"/>.
+            
+             This is done to minimize the number of RPC messages sent.
+             </summary>
+             <remarks>The caller needs to ensure thread-safety.</remarks>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Hosts.ServerTestHost.TestNodeStateChangeAggregator.#ctor(System.Guid)">
+             <summary>
+             Aggregates multiple <see cref="T:Microsoft.Testing.Platform.Extensions.Messages.TestNodeUpdateMessage"/> events
+             into a single <see cref="T:Microsoft.Testing.Platform.ServerMode.TestNodeStateChangedEventArgs"/>.
+            
+             This is done to minimize the number of RPC messages sent.
+             </summary>
+             <remarks>The caller needs to ensure thread-safety.</remarks>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Hosts.TestFrameworkProxy.Uid">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Hosts.TestFrameworkProxy.Version">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Hosts.TestFrameworkProxy.DisplayName">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Hosts.TestFrameworkProxy.Description">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Hosts.TestFrameworkProxy.IsEnabledAsync">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Hosts.ToolsTestHost.Uid">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Hosts.ToolsTestHost.Version">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Hosts.ToolsTestHost.DisplayName">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Hosts.ToolsTestHost.Description">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Hosts.ToolsTestHost.IsEnabledAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Testing.Platform.IPC.NamedPipeServer.InternalLoopAsync(System.Threading.CancellationToken)">
+            <summary>
+            4 bytes = message size
+            ------- Payload -------
+            4 bytes = serializer id
+            x bytes = object buffer.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Logging.LogLevel.Trace">
+            <summary>
+            Logs that contain the most detailed messages.
+            These messages may contain sensitive application data. These messages are disabled by default and should never be enabled in a production environment.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Logging.LogLevel.Debug">
+            <summary>
+            Logs that are used for interactive investigation during development.
+            These logs should primarily contain information useful for debugging and have no long-term value.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Logging.LogLevel.Information">
+            <summary>
+            Logs that track the general flow of the application.
+            These logs should have long-term value.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Logging.LogLevel.Warning">
+            <summary>
+            Logs that highlight an abnormal or unexpected event in the application flow, but do not otherwise cause the application execution to stop.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Logging.LogLevel.Error">
+            <summary>
+            Logs that highlight when the current flow of execution is stopped due to a failure.
+            These should indicate a failure in the current activity, not an application-wide failure.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Logging.LogLevel.Critical">
+            <summary>
+            Logs that describe an unrecoverable application or system crash, or a catastrophic failure that requires immediate attention.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Logging.LogLevel.None">
+            <summary>
+            Not used for writing log messages. Specifies that a logging category should not write any messages.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Logging.ServerLoggerForwarder">
+            <summary>
+            This logger forwards the messages back to the server host so that they're
+            logged over RPC back to the client.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Logging.TypeNameHelper">
+            <summary>
+            Borrowed from https://github.com/dotnet/runtime/blob/main/src/libraries/Common/src/Extensions/TypeNameHelper/TypeNameHelper.cs.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Logging.TypeNameHelper.GetTypeDisplayName(System.Type,System.Boolean,System.Boolean,System.Boolean,System.Char)">
+            <summary>
+            Pretty print a type name.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/>.</param>
+            <param name="fullName"><c>true</c> to print a fully qualified name.</param>
+            <param name="includeGenericParameterNames"><c>true</c> to include generic parameter names.</param>
+            <param name="includeGenericParameters"><c>true</c> to include generic parameters.</param>
+            <param name="nestedTypeDelimiter">Character to use as a delimiter in nested type names.</param>
+            <returns>The pretty printed type name.</returns>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Messages.TestNodeStateStatistics">
+            <summary>
+            Represents the test outcome and its retry execution statistics.
+            </summary>
+            <param name="HasPassed"> The test's single outcome or its final outcome. </param>
+            <param name="TotalPassedRetries"> The number of times the adapter reported a Passed outcome when retrying. </param>
+            <param name="TotalFailedRetries"> The number of times the adapter reported a Failed outcome when retrying. </param>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Messages.TestNodeStateStatistics.#ctor(System.Boolean,System.Int64,System.Int64)">
+            <summary>
+            Represents the test outcome and its retry execution statistics.
+            </summary>
+            <param name="HasPassed"> The test's single outcome or its final outcome. </param>
+            <param name="TotalPassedRetries"> The number of times the adapter reported a Passed outcome when retrying. </param>
+            <param name="TotalFailedRetries"> The number of times the adapter reported a Failed outcome when retrying. </param>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Messages.TestNodeStateStatistics.HasPassed">
+            <summary> The test's single outcome or its final outcome. </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Messages.TestNodeStateStatistics.TotalPassedRetries">
+            <summary> The number of times the adapter reported a Passed outcome when retrying. </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Messages.TestNodeStateStatistics.TotalFailedRetries">
+            <summary> The number of times the adapter reported a Failed outcome when retrying. </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.OutputDevice.ConsoleOutputDevice.Uid">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.OutputDevice.ConsoleOutputDevice.Version">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.OutputDevice.ConsoleOutputDevice.DisplayName">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.OutputDevice.ConsoleOutputDevice.Description">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Testing.Platform.OutputDevice.ConsoleOutputDevice.IsEnabledAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Testing.Platform.OutputDevice.ConsoleOutputDevice.DisplayAsync(Microsoft.Testing.Platform.Extensions.OutputDevice.IOutputDeviceDataProducer,Microsoft.Testing.Platform.OutputDevice.IOutputDeviceData)">
+            <summary>
+            Displays provided data through IConsole, which is typically System.Console.
+            </summary>
+            <param name="producer">The producer that sent the data.</param>
+            <param name="data">The data to be displayed.</param>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.OutputDevice.ConsoleOutputDevice.ToHumanReadableDuration(System.Nullable{System.Double})">
+            <summary>
+            Convert duration property text to human readable duration.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Requests.FilterOperator.Not">
+            <summary>
+            Negate the following expression.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Requests.FilterOperator.And">
+            <summary>
+            Combine the following expressions with a logical AND.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Requests.FilterOperator.Or">
+            <summary>
+            Combine the following expressions with a logical OR.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Requests.FilterOperator.Equals">
+            <summary>
+            Filter the following expression by the given property.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Requests.OperatorKind.None">
+            <summary>
+            Not an operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Requests.OperatorKind.Separator">
+            <summary>
+            A separator operator, used to separate multiple filters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Requests.OperatorKind.LeftBrace">
+            <summary>
+            An opening brace operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Requests.OperatorKind.RightBrace">
+            <summary>
+            A closing brace operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Requests.OperatorKind.LeftParameter">
+            <summary>
+            Left hand side of a filter expression.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Requests.OperatorKind.RightParameter">
+            <summary>
+            Right hand side of a filter expression.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Requests.OperatorKind.FilterEquals">
+            <summary>
+            Filter equals operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Requests.OperatorKind.Or">
+            <summary>
+            Operator used for combining multiple filters with a logical OR.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Testing.Platform.Requests.OperatorKind.And">
+            <summary>
+            Operator used for combining multiple filters with a logical AND.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Requests.TreeNodeFilter.ParseFilter(System.String)">
+            <remarks>
+            The current grammar for the filter looks as follows:
+            <code>
+            TREE_NODE_FILTER = EXPR ( '/' EXPR )*
+            EXPR =
+              '(' EXPR ')'
+              | EXPR OP EXPR
+              | NODE_VALUE
+            FILTER_EXPR =
+              '(' FILTER_EXPR ')'
+              | TOKEN '=' TOKEN
+              | FILTER_EXPR OP FILTER_EXPR
+              | TOKEN
+            OP = '&amp;' | '|'
+            NODE_VALUE = TOKEN | TOKEN '[' FILTER_EXPR ']'
+            TOKEN = string
+            </code>
+            </remarks>
+            <exception cref="T:System.InvalidOperationException">
+            Exception thrown, if the filter is malformed, for example <c>A(|B)</c> or <c>A)</c>.
+            </exception>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Requests.TreeNodeFilter.MatchesFilter(System.String,Microsoft.Testing.Platform.Extensions.Messages.PropertyBag)">
+            <summary>
+            Checks whether a node path matches the tree node filter.
+            </summary>
+            <param name="testNodeFullPath">The segment URL encoded path.</param>
+            <param name="filterableProperties">The URL encoded node properties.</param>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Requests.ValueAndPropertyExpression">
+            <summary>
+            This represents an expression that combines a value and a property expression,
+            for instance <c>MethodName[Trait=Foo]</c>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Requests.ValueAndPropertyExpression.#ctor(Microsoft.Testing.Platform.Requests.FilterExpression,Microsoft.Testing.Platform.Requests.FilterExpression)">
+            <summary>
+            This represents an expression that combines a value and a property expression,
+            for instance <c>MethodName[Trait=Foo]</c>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Resources.PlatformResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CannotCreateTestExecutionFilterErrorMessage">
+            <summary>
+              Looks up a localized string similar to Failed to create a test execution filter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CannotCreateUniqueLogFileErrorMessage">
+            <summary>
+              Looks up a localized string similar to Failed to create a unique log file after 3 seconds. Lastly tried file name is &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CannotRemoveEnvironmentVariableAtThisStageErrorMessage">
+            <summary>
+              Looks up a localized string similar to Cannot remove environment variables at this stage.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CannotRemoveEnvironmentVariableItIsLockedErrorMessage">
+            <summary>
+              Looks up a localized string similar to Extension &apos;{0}&apos; tried to remove environment variable &apos;{1}&apos; but it was locked by extension &apos;{2}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CannotSetEnvironmentVariableAtThisStageErrorMessage">
+            <summary>
+              Looks up a localized string similar to Cannot set environment variables at this stage.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CannotSetEnvironmentVariableItIsLockedErrorMessage">
+            <summary>
+              Looks up a localized string similar to Extension &apos;{0}&apos; tried to set environment variable &apos;{1}&apos; but it was locked by extension &apos;{2}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CannotStartProcessErrorMessage">
+            <summary>
+              Looks up a localized string similar to Cannot start process &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineInvalidArgumentsForOption">
+            <summary>
+              Looks up a localized string similar to Option &apos;--{0}&apos; has invalid arguments: {1}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineInvalidArityErrorMessage">
+            <summary>
+              Looks up a localized string similar to Invalid arity, maximum must be greater than minimum.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineInvalidConfiguration">
+            <summary>
+              Looks up a localized string similar to Invalid configuration for provider &apos;{0}&apos; (UID: {1}). Error: {2}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineInvalidOptionName">
+            <summary>
+              Looks up a localized string similar to Invalid option name &apos;{0}&apos;, it must contain only letter and &apos;-&apos; (e.g. my-option).
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineOptionExpectsAtLeastArguments">
+            <summary>
+              Looks up a localized string similar to Option &apos;--{0}&apos; from provider &apos;{1}&apos; (UID: {2}) expects at least {3} arguments.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineOptionExpectsAtMostArguments">
+            <summary>
+              Looks up a localized string similar to Option &apos;--{0}&apos; from provider &apos;{1}&apos; (UID: {2}) expects at most {3} arguments.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineOptionExpectsNoArguments">
+            <summary>
+              Looks up a localized string similar to Option &apos;--{0}&apos; from provider &apos;{1}&apos; (UID: {2}) expects no arguments.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineOptionIsDeclaredByMultipleProviders">
+            <summary>
+              Looks up a localized string similar to Option &apos;--{0}&apos; is declared by multiple extensions: &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineOptionIsDeclaredByMultipleProvidersWorkaround">
+            <summary>
+              Looks up a localized string similar to You can fix the previous option clash by overriding the option name using the configuration file.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineOptionIsReserved">
+            <summary>
+              Looks up a localized string similar to Option &apos;--{0}&apos; is reserved and cannot be used by providers: &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineOptionIsUsingReservedPrefix">
+            <summary>
+              Looks up a localized string similar to Option `--{0}` from provider &apos;{1}&apos; (UID: {2}) is using the reserved prefix &apos;--internal&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineParserUnexpectedArgument">
+            <summary>
+              Looks up a localized string similar to Unexpected argument {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineParserUnexpectedNullArgument">
+            <summary>
+              Looks up a localized string similar to Unexpected null argument at index {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineParserUnexpectedSingleQuoteInArgument">
+            <summary>
+              Looks up a localized string similar to Unexpected single quote in argument: {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineParserUnexpectedSingleQuoteInArgumentForOption">
+            <summary>
+              Looks up a localized string similar to Unexpected single quote in argument: {0} for option &apos;--{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CommandLineUnknownOption">
+            <summary>
+              Looks up a localized string similar to Unknown option &apos;--{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CompositeServiceFactoryInstanceAlreadyRegistered">
+            <summary>
+              Looks up a localized string similar to The same instance of &apos;CompositeExtensonFactory&apos; is already registered.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.ConfigurationManagerCannotFindDefaultJsonConfigurationErrorMessage">
+            <summary>
+              Looks up a localized string similar to Could not find the default json configuration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.ConnectingToClientHost">
+            <summary>
+              Looks up a localized string similar to Connecting to client host &apos;{0}&apos; port &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.ConsoleTestExecutionFilterFactoryDescription">
+            <summary>
+              Looks up a localized string similar to Creates the right test execution filter for console mode.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.ConsoleTestExecutionFilterFactoryDisplayName">
+            <summary>
+              Looks up a localized string similar to Console test execution filter factory.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.CouldNotFindDirectoryErrorMessage">
+            <summary>
+              Looks up a localized string similar to Could not find directory &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.EnvironmentVariableProviderFailedWithError">
+            <summary>
+              Looks up a localized string similar to Provider &apos;{0}&apos; (UID: {1}) failed with error: {2}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.ExtensionDoesNotImplementGivenInterfaceErrorMessage">
+            <summary>
+              Looks up a localized string similar to Extension of type &apos;{0}&apos; is not implementing the required &apos;{1}&apos; interface.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.ExtensionWithSameUidAlreadyRegisteredErrorMessage">
+            <summary>
+              Looks up a localized string similar to Another extension with same the same UID &apos;{0}&apos; has already been registered. Registered extension is of type &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.FailedToWriteLogToChannelErrorMessage">
+             <summary>
+               Looks up a localized string similar to Failed to write the log to the channel. Missed log content:
+            {0}.
+             </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.GlobalValidationOfTestHostEnvironmentVariablesFailedErrorMessage">
+            <summary>
+              Looks up a localized string similar to The following &apos;ITestHostEnvironmentVariableProvider&apos; providers rejected the final environment variables setup:.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.HelpApplicationUsage">
+            <summary>
+              Looks up a localized string similar to Usage {0} [option providers] [extension option providers].
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.HelpExecuteTestApplication">
+            <summary>
+              Looks up a localized string similar to Execute a .NET Test Application..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.HelpExtensionOptions">
+            <summary>
+              Looks up a localized string similar to Extension options:.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.HelpNoExtensionRegistered">
+            <summary>
+              Looks up a localized string similar to     No extension registered..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.HelpOptions">
+            <summary>
+              Looks up a localized string similar to Options:.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.HelpTestApplicationRunner">
+            <summary>
+              Looks up a localized string similar to &lt;test application runner&gt;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.InternalLoopAsyncDidNotExitSuccessfullyErrorMessage">
+            <summary>
+              Looks up a localized string similar to Method &apos;{0}&apos; did not exit successfully.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.InvalidCommandLineArguments">
+            <summary>
+              Looks up a localized string similar to Invalid command line arguments:.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.JsonConfigurationFileParserDuplicateKeyErrorMessage">
+            <summary>
+              Looks up a localized string similar to A duplicate key &apos;{0}&apos; was found.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.JsonConfigurationFileParserTopLevelElementIsNotAnObjectErrorMessage">
+            <summary>
+              Looks up a localized string similar to Top-level JSON element must be an object. Instead, &apos;{0}&apos; was found.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.JsonConfigurationFileParserUnsupportedTokenErrorMessage">
+            <summary>
+              Looks up a localized string similar to Unsupported JSON token &apos;{0}&apos; was found.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.JsonRpcTcpServerDescription">
+            <summary>
+              Looks up a localized string similar to JsonRpc server implementation based on the test platform protocol specification..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.JsonRpcTcpServerToSingleClientDescription">
+            <summary>
+              Looks up a localized string similar to JsonRpc server to client handshake, implementation based on the test platform protocol specification..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.NoSerializerRegisteredWithIdErrorMessage">
+            <summary>
+              Looks up a localized string similar to No serializer registered with ID &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.NoSerializerRegisteredWithTypeErrorMessage">
+            <summary>
+              Looks up a localized string similar to No serializer registered with type &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.NotAvailable">
+            <summary>
+              Looks up a localized string similar to Not available.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.NotFound">
+            <summary>
+              Looks up a localized string similar to Not found.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineClientHostOptionDescription">
+            <summary>
+              Looks up a localized string similar to Specify the hostname of the client..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineClientHostOptionSingleArgument">
+            <summary>
+              Looks up a localized string similar to &apos;--client-host&apos; expects a single host name as argument.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineClientPortOptionDescription">
+            <summary>
+              Looks up a localized string similar to Specify the port of the client..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineDiagnosticFileLoggerSynchronousWriteOptionDescription">
+            <summary>
+              Looks up a localized string similar to Force the built-in file logger to write the log synchronously. Useful for scenario where you don&apos;t want to lose any log (i.e. in case of crash). Note that this is slowing down the test execution..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineDiagnosticFilePrefixOptionSingleArgument">
+            <summary>
+              Looks up a localized string similar to &apos;--diagnostic-output-fileprefix&apos; expects a single file name prefix argument.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineDiagnosticOptionDescription">
+            <summary>
+              Looks up a localized string similar to Enable the diagnostic logging. The default log level is &apos;Trace&apos;. The file will be written in the output directory with the name log_[MMddHHssfff].diag.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineDiagnosticOptionExpectsSingleArgumentErrorMessage">
+            <summary>
+              Looks up a localized string similar to &apos;--diagnostic-verbosity&apos; expects a single level argument (&apos;Trace&apos;, &apos;Debug&apos;, &apos;Information&apos;, &apos;Warning&apos;, &apos;Error&apos;, or &apos;Critical&apos;).
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineDiagnosticOptionIsMissing">
+            <summary>
+              Looks up a localized string similar to &apos;--{0}&apos; requires &apos;--diagnostic&apos; to be provided.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineDiagnosticOutputDirectoryOptionDescription">
+            <summary>
+              Looks up a localized string similar to Output directory of the diagnostic logging, if not specified the file will be generated inside the default &apos;TestResults&apos; directory..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineDiagnosticOutputDirectoryOptionSingleArgument">
+            <summary>
+              Looks up a localized string similar to &apos;--diagnostic-output-directory&apos; expects a single directory name argument.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineDiagnosticOutputFilePrefixOptionDescription">
+            <summary>
+              Looks up a localized string similar to Prefix for the log file name that will replace &apos;[log]_.&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineDiagnosticVerbosityOptionDescription">
+            <summary>
+              Looks up a localized string similar to Define the level of the verbosity for the --diagnostic. The available values are &apos;Trace&apos;, &apos;Debug&apos;, &apos;Information&apos;, &apos;Warning&apos;, &apos;Error&apos;, and &apos;Critical&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineDiscoverTestsOptionDescription">
+            <summary>
+              Looks up a localized string similar to List available tests..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineHelpOptionDescription">
+            <summary>
+              Looks up a localized string similar to Show the command line help..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineIgnoreExitCodeOptionDescription">
+            <summary>
+              Looks up a localized string similar to Do not report non successful exit value for specific exit codes (e.g. &apos;--ignore-exit-code 8;9&apos; ignore exit code 8 and 9 and will return 0 in these case).
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineInfoOptionDescription">
+            <summary>
+              Looks up a localized string similar to Display .NET test application information..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineMinimumExpectedTestsIncompatibleDiscoverTests">
+            <summary>
+              Looks up a localized string similar to &apos;--list-tests&apos; and &apos;--minimum-expected-tests&apos; are incompatible options.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineMinimumExpectedTestsOptionSingleArgument">
+            <summary>
+              Looks up a localized string similar to &apos;--minimum-expected-tests&apos; expects a single non-zero positive integer value (e.g. &apos;--minimum-expected-tests 10&apos;).
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineNoBannerOptionDescription">
+            <summary>
+              Looks up a localized string similar to Do not display the startup banner, the copyright message or the telemetry banner..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineOptionExpectsNoArgumentErrorMessage">
+            <summary>
+              Looks up a localized string similar to &apos;--{0}&apos; expects no argument.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLinePortOptionDescription">
+            <summary>
+              Looks up a localized string similar to Specify the port of the server..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLinePortOptionSingleArgument">
+            <summary>
+              Looks up a localized string similar to &apos;--{0}&apos; expects a single valid port as argument.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineProviderDescription">
+            <summary>
+              Looks up a localized string similar to Microsoft Testing Platform command line provider.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineProviderDisplayName">
+            <summary>
+              Looks up a localized string similar to Platform command line provider.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineResultDirectoryOptionDescription">
+            <summary>
+              Looks up a localized string similar to The directory where the test results are going to be placed. If the specified directory doesn&apos;t exist, it&apos;s created. The default is TestResults in the directory that contains the test application..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineServerOptionDescription">
+            <summary>
+              Looks up a localized string similar to Enable the server mode..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineSkipBuildersNumberCheckOptionDescription">
+            <summary>
+              Looks up a localized string similar to For testing purposes.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineTestHostControllerPIDOptionDescription">
+            <summary>
+              Looks up a localized string similar to Eventual parent test host controller PID..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.PlatformCommandLineVSTestAdapterModeOptionDescription">
+            <summary>
+              Looks up a localized string similar to Bridge to VSTest APIs.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.ProcessHasNotYetExitedErrorMessage">
+            <summary>
+              Looks up a localized string similar to Process should have exited before we can determine this value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.RetryFailedAfterTriesErrorMessage">
+            <summary>
+              Looks up a localized string similar to Retry failed after {0} times.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.ServerLogMessageDescription">
+            <summary>
+              Looks up a localized string similar to This data represents a server log message.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.ServerLogMessageDisplayName">
+            <summary>
+              Looks up a localized string similar to Server log message.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.ServerTestExecutionFilterFactoryDescription">
+            <summary>
+              Looks up a localized string similar to Creates the right test execution filter for server mode.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.ServerTestExecutionFilterFactoryDisplayName">
+            <summary>
+              Looks up a localized string similar to Server test execution filter factory.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.ServiceProviderCannotFindServiceErrorMessage">
+            <summary>
+              Looks up a localized string similar to Cannot find service of type &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.ServiceProviderServiceAlreadyRegistered">
+            <summary>
+              Looks up a localized string similar to Instance of type &apos;{0}&apos; is already registered.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.ServiceProviderShouldNotRegisterTestFramework">
+            <summary>
+              Looks up a localized string similar to Instances of type &apos;ITestFramework&apos; should not be registered through the service provider but through &apos;ITestApplicationBuilder.RegisterTestFramework&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.StartingServer">
+            <summary>
+              Looks up a localized string similar to Starting server. Listening on port &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TelemetryNotice">
+             <summary>
+               Looks up a localized string similar to Telemetry
+            ---------
+            Microsoft Testing Platform collects usage data in order to help us improve your experience. The data is collected by Microsoft and are not shared with anyone.
+            You can opt-out of telemetry by setting the TESTINGPLATFORM_TELEMETRY_OPTOUT or DOTNET_CLI_TELEMETRY_OPTOUT environment variable to &apos;1&apos; or &apos;true&apos; using your favorite shell.
+            
+            Read more about Microsoft Testing Platform telemetry: https://aka.ms/testingplatform/telemetry.
+             </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TelemetryProviderAlreadySetErrorMessage">
+            <summary>
+              Looks up a localized string similar to Telemetry provider is already set.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TestAdapterInvokerFactoryAlreadySetErrorMessage">
+            <summary>
+              Looks up a localized string similar to An &apos;ITestFrameworkInvoker&apos; factory is already set.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TestApplicationBuilderApplicationAlreadyRegistered">
+            <summary>
+              Looks up a localized string similar to The application has already been built.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TestApplicationBuilderFrameworkAdapterFactoryAlreadyRegisteredErrorMessage">
+            <summary>
+              Looks up a localized string similar to The test framework adapter factory has already been registered.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TestApplicationBuilderTestFrameworkCapabilitiesAlreadyRegistered">
+            <summary>
+              Looks up a localized string similar to The test framework capabilities factory has already been registered.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TestApplicationBuilderTestFrameworkNotRegistered">
+            <summary>
+              Looks up a localized string similar to The test framework adapter has not been registered. Use &apos;RegisterTestFrameworkAdapter&apos; to register it.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TestApplicationResultDescription">
+            <summary>
+              Looks up a localized string similar to Determine the result of the test application execution.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TestApplicationResultDisplayName">
+            <summary>
+              Looks up a localized string similar to Test application result.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TestApplicationVSTestModeTooManyBuilders">
+            <summary>
+              Looks up a localized string similar to VSTest mode only supports a single TestApplicationBuilder per process.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TEstExecutionFilterFactoryFactoryAlreadySetErrorMessage">
+            <summary>
+              Looks up a localized string similar to An &apos;ITestExecutionFilterFactory&apos; factory is already set.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TestFrameworkProxyApiShouldNotBeCalled">
+            <summary>
+              Looks up a localized string similar to Method &apos;{0}&apos; should not have been called on this proxy object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TestHostAdapterInvokerFailedTestSessionErrorMessage">
+            <summary>
+              Looks up a localized string similar to Test adapter test session failure.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TestProcessDidNotExitGracefullyErrorMessage">
+            <summary>
+              Looks up a localized string similar to Test application process didn&apos;t exit gracefully, exit code is &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TimeoutAcquiringSemaphoreErrorMessage">
+            <summary>
+              Looks up a localized string similar to Failed to acquire semaphore before timeout of &apos;{0}&apos; seconds.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TimeoutFlushingLogsErrorMessage">
+            <summary>
+              Looks up a localized string similar to Failed to flush logs before the timeout of &apos;{0}&apos; seconds.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TreeNodeFilterCannotContainSlashCharacterErrorMessage">
+            <summary>
+              Looks up a localized string similar to A filter &apos;{0}&apos; should not contain a &apos;/&apos; character.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TreeNodeFilterDescription">
+            <summary>
+              Looks up a localized string similar to Use a tree filter to filter down the tests to execute.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TreeNodeFilterEscapeCharacterShouldNotBeLastErrorMessage">
+            <summary>
+              Looks up a localized string similar to An escape character should not terminate the filter string &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TreeNodeFilterInvalidArgumentCount">
+            <summary>
+              Looks up a localized string similar to A single argument is expected (e.g. &apos;/MyAssembly/MyNamespace/MyClass/MyTestMethod*[OS=Linux]&apos;).
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TreeNodeFilterOnlyLastLevelCanContainMutiLevelWildcardErrorMessage">
+            <summary>
+              Looks up a localized string similar to Only the final filter path can contain &apos;**&apos; wildcard.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TreeNodeFilterOperatorNotAllowedErrorMessage">
+            <summary>
+              Looks up a localized string similar to Unexpected operator &apos;&amp;&apos; or &apos;|&apos; within filter expression &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TreeNodeFilterPathShouldStartWithSlashErrorMessage">
+            <summary>
+              Looks up a localized string similar to Invalid node path, expected root as first character &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TreeNodeFilterUnbalancedFilterErrorMessage">
+            <summary>
+              Looks up a localized string similar to Filter expression &apos;{0}&apos; contains an unbalanced number of &apos;{1}&apos; &apos;{2}&apos; operators.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.TreeNodeFilterUnexpectedSlashOperatorErrorMessage">
+            <summary>
+              Looks up a localized string similar to Filter contains an unexpected &apos;/&apos; operator inside a parenthesized expression.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.UnexpectedCallTelemetryIsDisabledErrorMessage">
+            <summary>
+              Looks up a localized string similar to Unexpected telemetry call, the telemetry is disabled..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.UnexpectedExceptionDuringByteConversionErrorMessage">
+            <summary>
+              Looks up a localized string similar to An unexpected exception occured during byte conversion.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.UnexpectedExceptionInFileLoggerErrorMessage">
+             <summary>
+               Looks up a localized string similar to An unexpected exception occured in &apos;FileLogger.WriteLogToFileAsync&apos;.
+            {0}.
+             </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.UnexpectedStateErrorMessage">
+            <summary>
+              Looks up a localized string similar to Unexpected state in file &apos;{0}&apos; at line &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.UnknownCommunicationProtocolErrorMessage">
+            <summary>
+              Looks up a localized string similar to The communication protocol &apos;{0}&apos; is not supported.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Resources.PlatformResources.UnreachableLocationErrorMessage">
+            <summary>
+              Looks up a localized string similar to This program location is thought to be unreachable. File=&apos;{0}&apos; Line={1}.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.ServerMode.IMessageFormatter">
+            <summary>
+            A message formatter converts objects into a serialized format and can deserialize data into
+            corresponding objects.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.ServerMode.IMessageHandler.ReadAsync(System.Threading.CancellationToken)">
+            <summary>
+            Reads the next <see cref="T:Microsoft.Testing.Platform.ServerMode.RpcMessage"/> payload from the client.
+            </summary>
+            <remarks>
+            The reading is likely backed by a data stream and the message handler is responsible
+            for reading the data stream and deserialization of the message.
+            If the reading from the stream is canceled will throw an exception.
+            If deserialization of the message fails, also will throw an exception.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.ServerMode.IMessageHandler.WriteRequestAsync(Microsoft.Testing.Platform.ServerMode.RpcMessage,System.Threading.CancellationToken)">
+            <summary>
+            Writes the next <see cref="T:Microsoft.Testing.Platform.ServerMode.RpcMessage"/> to the client.
+            </summary>
+            <remarks>
+            The writing is likely backed by a data stream and the message handler is responsible
+            for writing to the data stream and serialization of the message.
+            If serialization of the message fails, will throw an exception.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.ServerMode.PerRequestServerDataConsumer">
+            <summary>
+            This class converts the events send to the message bus and sends these back to the client.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.ServerMode.PerRequestServerDataConsumer.#ctor(System.IServiceProvider,System.Guid,Microsoft.Testing.Platform.Helpers.ITask)">
+            <summary>
+            This class converts the events send to the message bus and sends these back to the client.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.ServerMode.PerRequestServerDataConsumer.Uid">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.ServerMode.PerRequestServerDataConsumer.Version">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.ServerMode.PerRequestServerDataConsumer.DisplayName">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.ServerMode.PerRequestServerDataConsumer.Description">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Testing.Platform.ServerMode.PerRequestServerDataConsumer.IsEnabledAsync">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Testing.Platform.ServerMode.RequestMessage">
+            <summary>
+            A request is a message for which the server should return a corresponding
+            <see cref="T:Microsoft.Testing.Platform.ServerMode.ErrorMessage"/> or <see cref="T:Microsoft.Testing.Platform.ServerMode.ResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.ServerMode.RequestMessage.#ctor(System.Int32,System.String,System.Object)">
+            <summary>
+            A request is a message for which the server should return a corresponding
+            <see cref="T:Microsoft.Testing.Platform.ServerMode.ErrorMessage"/> or <see cref="T:Microsoft.Testing.Platform.ServerMode.ResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.ServerMode.NotificationMessage">
+            <summary>
+            A notification message is a message that notifies the server of an event.
+            There's no corresponding response that the server should send back and as such
+            no Id is specified when sending a notification.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.ServerMode.NotificationMessage.#ctor(System.String,System.Object)">
+            <summary>
+            A notification message is a message that notifies the server of an event.
+            There's no corresponding response that the server should send back and as such
+            no Id is specified when sending a notification.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.ServerMode.ErrorMessage">
+            <summary>
+            An error message is sent if some exception was thrown when processing the request.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.ServerMode.ErrorMessage.#ctor(System.Int32,System.Int32,System.String,System.Object)">
+            <summary>
+            An error message is sent if some exception was thrown when processing the request.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.ServerMode.ResponseMessage">
+            <summary>
+            An response message is sent if a request is handled successfully.
+            </summary>
+            <remarks>
+            If the RPC handler returns a <see cref="T:System.Threading.Tasks.Task"/> the <paramref name="Result"/>
+            will be returned as <c>null</c>.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.ServerMode.ResponseMessage.#ctor(System.Int32,System.Object)">
+            <summary>
+            An response message is sent if a request is handled successfully.
+            </summary>
+            <remarks>
+            If the RPC handler returns a <see cref="T:System.Threading.Tasks.Task"/> the <paramref name="Result"/>
+            will be returned as <c>null</c>.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.ServerMode.SerializerUtilities.#cctor">
+            <summary>
+            Initializes static members of the <see cref="T:Microsoft.Testing.Platform.ServerMode.SerializerUtilities"/> class.
+            Is a known fact that this serializer jsonite based suffer of boxing/unboxing issue but it's only for netstandard2.0 and we don't optimize for it for now.
+            We aim to rewrite all the serialization with the best perfomance using .NET System.Text.Json api inside the Json.cs file.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Services.ServiceProviderExtensions">
+            <summary>
+            Extension methods for getting services from an <see cref="T:System.IServiceProvider" />.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Services.TestApplicationResult.Uid">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Services.TestApplicationResult.Version">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Services.TestApplicationResult.DisplayName">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Services.TestApplicationResult.Description">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.Testing.Platform.Services.TestApplicationResult.DataTypesConsumed">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Services.TestApplicationResult.IsEnabledAsync">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Testing.Platform.Telemetry.ITelemetryCollector">
+            <summary>
+            This service allows to collect usage information.
+            For instance how long different operations run for, what kinds of capabilities
+            are being enabled, disabled.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Testing.Platform.Telemetry.ITelemetryCollector.LogEventAsync(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Logs a telemetry event.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute">
+            <summary>
+            Indicates that compiler support for a particular feature is required for the location where this attribute is applied.
+            </summary>
+        </member>
+        <member name="F:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.RefStructs">
+            <summary>
+            The <see cref="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName"/> used for the ref structs C# feature.
+            </summary>
+        </member>
+        <member name="F:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.RequiredMembers">
+            <summary>
+            The <see cref="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName"/> used for the required members C# feature.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute"/> class.
+            </summary>
+            <param name="featureName">The name of the feature to indicate.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName">
+            <summary>
+            Gets the name of the compiler feature.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.IsOptional">
+            <summary>
+            Gets or sets a value indicating whether if true, the compiler can choose to allow access to the location where this attribute is applied if it does not understand <see cref="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName"/>.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.RequiredMemberAttribute">
+            <summary>
+            Specifies that a type has required members or that a member is required.
+            </summary>
+        </member>
+        <member name="T:System.Index">
+            <summary>Represent a type can be used to index a collection either from the start or the end.</summary>
+            <remarks>
+            Index is used by the C# compiler to support the new index syntax.
+            <code>
+            int[] someArray = new int[5] { 1, 2, 3, 4, 5 } ;
+            int lastElement = someArray[^1]; // lastElement = 5
+            </code>
+            </remarks>
+        </member>
+        <member name="M:System.Index.#ctor(System.Int32,System.Boolean)">
+            <summary>Initializes a new instance of the <see cref="T:System.Index"/> struct.Construct an Index using a value and indicating if the index is from the start or from the end.</summary>
+            <param name="value">The index value. it has to be zero or positive number.</param>
+            <param name="fromEnd">Indicating if the index is from the start or from the end.</param>
+            <remarks>
+            If the Index constructed from the end, index value 1 means pointing at the last element and index value 0 means pointing at beyond last element.
+            </remarks>
+        </member>
+        <member name="P:System.Index.Start">
+            <summary>Gets create an Index pointing at first element.</summary>
+        </member>
+        <member name="P:System.Index.End">
+            <summary>Gets create an Index pointing at beyond last element.</summary>
+        </member>
+        <member name="M:System.Index.FromStart(System.Int32)">
+            <summary>Create an Index from the start at the position indicated by the value.</summary>
+            <param name="value">The index value from the start.</param>
+        </member>
+        <member name="M:System.Index.FromEnd(System.Int32)">
+            <summary>Create an Index from the end at the position indicated by the value.</summary>
+            <param name="value">The index value from the end.</param>
+        </member>
+        <member name="P:System.Index.Value">
+            <summary>Gets the index value.</summary>
+        </member>
+        <member name="P:System.Index.IsFromEnd">
+            <summary>Gets a value indicating whether indicates whether the index is from the start or the end.</summary>
+        </member>
+        <member name="M:System.Index.GetOffset(System.Int32)">
+            <summary>Calculate the offset from the start using the giving collection length.</summary>
+            <param name="length">The length of the collection that the Index will be used with. length has to be a positive value.</param>
+            <remarks>
+            For performance reason, we don't validate the input length parameter and the returned offset value against negative values.
+            we don't validate either the returned offset is greater than the input length.
+            It is expected Index will be used with collections which always have non negative length/count. If the returned offset is negative and
+            then used to index a collection will get out of range exception which will be same affect as the validation.
+            </remarks>
+        </member>
+        <member name="M:System.Index.Equals(System.Object)">
+            <summary>Indicates whether the current Index object is equal to another object of the same type.</summary>
+            <param name="obj">An object to compare with this object.</param>
+        </member>
+        <member name="M:System.Index.Equals(System.Index)">
+            <summary>Indicates whether the current Index object is equal to another Index object.</summary>
+            <param name="other">An object to compare with this object.</param>
+        </member>
+        <member name="M:System.Index.GetHashCode">
+            <summary>Returns the hash code for this instance.</summary>
+        </member>
+        <member name="M:System.Index.op_Implicit(System.Int32)~System.Index">
+            <summary>Converts integer number to an Index.</summary>
+        </member>
+        <member name="M:System.Index.ToString">
+            <summary>Converts the value of the current Index object to its equivalent string representation.</summary>
+        </member>
+        <member name="T:System.Range">
+            <summary>Represent a range has start and end indexes.</summary>
+            <remarks>
+            Range is used by the C# compiler to support the range syntax.
+            <code>
+            int[] someArray = new int[5] { 1, 2, 3, 4, 5 };
+            int[] subArray1 = someArray[0..2]; // { 1, 2 }
+            int[] subArray2 = someArray[1..^0]; // { 2, 3, 4, 5 }
+            </code>
+            </remarks>
+        </member>
+        <member name="P:System.Range.Start">
+            <summary>Gets represent the inclusive start index of the Range.</summary>
+        </member>
+        <member name="P:System.Range.End">
+            <summary>Gets represent the exclusive end index of the Range.</summary>
+        </member>
+        <member name="M:System.Range.#ctor(System.Index,System.Index)">
+            <summary>Initializes a new instance of the <see cref="T:System.Range"/> struct.Construct a Range object using the start and end indexes.</summary>
+            <param name="start">Represent the inclusive start index of the range.</param>
+            <param name="end">Represent the exclusive end index of the range.</param>
+        </member>
+        <member name="M:System.Range.Equals(System.Object)">
+            <summary>Indicates whether the current Range object is equal to another object of the same type.</summary>
+            <param name="obj">An object to compare with this object.</param>
+        </member>
+        <member name="M:System.Range.Equals(System.Range)">
+            <summary>Indicates whether the current Range object is equal to another Range object.</summary>
+            <param name="other">An object to compare with this object.</param>
+        </member>
+        <member name="M:System.Range.GetHashCode">
+            <summary>Returns the hash code for this instance.</summary>
+        </member>
+        <member name="M:System.Range.ToString">
+            <summary>Converts the value of the current Range object to its equivalent string representation.</summary>
+        </member>
+        <member name="M:System.Range.StartAt(System.Index)">
+            <summary>Create a Range object starting from start index to the end of the collection.</summary>
+        </member>
+        <member name="M:System.Range.EndAt(System.Index)">
+            <summary>Create a Range object starting from first element in the collection to the end Index.</summary>
+        </member>
+        <member name="P:System.Range.All">
+            <summary>Gets create a Range object starting from first element to the end.</summary>
+        </member>
+        <member name="M:System.Range.GetOffsetAndLength(System.Int32)">
+            <summary>Calculate the start offset and length of range object using a collection length.</summary>
+            <param name="length">The length of the collection that the range will be used with. length has to be a positive value.</param>
+            <remarks>
+            For performance reason, we don't validate the input length parameter against negative values.
+            It is expected Range will be used with collections which always have non negative length/count.
+            We validate the range is inside the length scope though.
+            </remarks>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.AllowNullAttribute">
+            <summary>Specifies that null is allowed as an input even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute">
+            <summary>Specifies that null is disallowed as an input even if the corresponding type allows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute">
+            <summary>Specifies that an output may be null even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullAttribute">
+            <summary>Specifies that an output will not be null even if the corresponding type allows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute">
+            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue"/>, the parameter may be null even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute"/> class.Initializes the attribute with the specified return value condition.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter may be null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue">
+            <summary>Gets a value indicating whether gets the return value condition.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute">
+            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue"/>, the parameter will not be null even if the corresponding type allows it.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute"/> class.Initializes the attribute with the specified return value condition.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter will not be null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue">
+            <summary>Gets a value indicating whether gets the return value condition.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute">
+            <summary>Specifies that the output will be non-null if the named parameter is non-null.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.#ctor(System.String)">
+            <summary>Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute"/> class.Initializes the attribute with the associated parameter name.</summary>
+            <param name="parameterName">
+            The associated parameter name.  The output will be non-null if the argument to the parameter specified is non-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.ParameterName">
+            <summary>Gets the associated parameter name.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute">
+            <summary>Applied to a method that will never return under any circumstance.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute">
+            <summary>Specifies that the method will not return if the associated Boolean parameter is passed the specified value.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.#ctor(System.Boolean)">
+            <summary>Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute"/> class.Initializes the attribute with the specified parameter value.</summary>
+            <param name="parameterValue">
+            The condition parameter value. Code after the method will be considered unreachable by diagnostics if the argument to
+            the associated parameter matches this value.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.ParameterValue">
+            <summary>Gets a value indicating whether gets the condition parameter value.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute">
+            <summary>Specifies that the method or property will ensure that the listed field and property members have not-null values.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String)">
+            <summary>Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute"/> class.Initializes the attribute with a field or property member.</summary>
+            <param name="member">
+            The field or property member that is promised to be not-null.
+            </param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String[])">
+            <summary>Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute"/> class.Initializes the attribute with the list of field and property members.</summary>
+            <param name="members">
+            The list of field and property members that are promised to be not-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.Members">
+            <summary>Gets field or property member names.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute">
+            <summary>Specifies that the method or property will ensure that the listed field and property members have not-null values when returning with the specified return value condition.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute"/> class.Initializes the attribute with the specified return value condition and a field or property member.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter will not be null.
+            </param>
+            <param name="member">
+            The field or property member that is promised to be not-null.
+            </param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String[])">
+            <summary>Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute"/> class.Initializes the attribute with the specified return value condition and list of field and property members.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter will not be null.
+            </param>
+            <param name="members">
+            The list of field and property members that are promised to be not-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.ReturnValue">
+            <summary>Gets a value indicating whether gets the return value condition.</summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.Members">
+            <summary>Gets field or property member names.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute">
+            <summary>
+            Specifies that this constructor sets all required members for the current type,
+            and callers do not need to set any required members themselves.
+            </summary>
+        </member>
+        <member name="T:Jsonite.Json">
+            <summary>
+            A JSON parser and reflector to Dictionary/List.
+            </summary>
+        </member>
+        <member name="M:Jsonite.Json.Deserialize(System.String,Jsonite.JsonSettings)">
+            <summary>
+            Deserializes the specified json text into an object.
+            </summary>
+            <param name="text">A json text.</param>
+            <param name="settings">The settings used to deserialize.</param>
+            <returns>An object representing the deserialized json text</returns>
+            <exception cref="T:System.ArgumentNullException">if text is null</exception>
+        </member>
+        <member name="M:Jsonite.Json.Deserialize(System.IO.TextReader,Jsonite.JsonSettings)">
+            <summary>
+            Deserializes the specified json text into an object.
+            </summary>
+            <param name="reader">The reader providing a json text.</param>
+            <param name="settings">The settings used to deserialize.</param>
+            <returns>An object representing the deserialized json text</returns>
+            <exception cref="T:System.ArgumentNullException">if reader is null</exception>
+        </member>
+        <member name="M:Jsonite.Json.Validate(System.String,Jsonite.JsonSettings)">
+            <summary>
+            Validates the specified json text.
+            </summary>
+            <param name="text">A json text.</param>
+            <param name="settings">The settings used to deserialize.</param>
+            <exception cref="T:System.ArgumentNullException">if reader is null</exception>
+            <exception cref="T:Jsonite.JsonException">if the json text is not valid</exception>
+        </member>
+        <member name="M:Jsonite.Json.Validate(System.IO.TextReader,Jsonite.JsonSettings)">
+            <summary>
+            Validates the specified json text.
+            </summary>
+            <param name="reader">The reader providing a json text.</param>
+            <param name="settings">The settings used to deserialize.</param>
+            <exception cref="T:System.ArgumentNullException">if reader is null</exception>
+            <exception cref="T:Jsonite.JsonException">if the json text is not valid</exception>
+        </member>
+        <member name="M:Jsonite.Json.Serialize(System.Object,Jsonite.JsonSettings)">
+            <summary>
+            Serializes the specified value to a json text.
+            </summary>
+            <param name="value">The value to serialize.</param>
+            <param name="settings">The settings used to serialize.</param>
+            <returns>A json string representation of the serialized value</returns>
+        </member>
+        <member name="M:Jsonite.Json.Serialize(System.Object,System.IO.TextWriter,Jsonite.JsonSettings)">
+            <summary>
+            Serializes the specified value to a json text.
+            </summary>
+            <param name="value">The value to serialize.</param>
+            <param name="writer">The output writer that will contains the serialized json text.</param>
+            <param name="settings">The settings used to serialize.</param>
+        </member>
+        <member name="T:Jsonite.Json.JsonReader">
+            <summary>
+            The internal JsonReader used to deserialize a json text into an object graph.
+            </summary>
+        </member>
+        <member name="T:Jsonite.Json.JsonWriter">
+            <summary>
+            The internal class used to serialize an object graph to a json text.
+            </summary>
+        </member>
+        <member name="T:Jsonite.JsonObject">
+            <summary>
+            The default object used when a deserializing to an object type.
+            </summary>
+        </member>
+        <member name="T:Jsonite.JsonArray">
+            <summary>
+            The default array used when deserializing to an array type.
+            </summary>
+        </member>
+        <member name="T:Jsonite.JsonException">
+            <summary>
+            Instance exception used when a parsing exception occured.
+            </summary>
+            <remarks>
+            This exception can be overriden by overriding the method <see cref="M:Jsonite.IJsonReflector.OnDeserializeRaiseParsingError(System.Int32,System.Int32,System.Int32,System.String,System.Exception)"/>.
+            </remarks>
+        </member>
+        <member name="F:Jsonite.JsonException.Offset">
+            <summary>
+            Character offset from the beginning of the text being parsed.
+            </summary>
+        </member>
+        <member name="F:Jsonite.JsonException.Line">
+            <summary>
+            Line position (zero-based) where the error occured from the beginning of the text being parsed.
+            </summary>
+        </member>
+        <member name="F:Jsonite.JsonException.Column">
+            <summary>
+            Column position (zero-based) where the error occured.
+            </summary>
+        </member>
+        <member name="M:Jsonite.JsonException.ToString">
+            <summary>
+            Prints the line (1-based) and column (1-based).
+            </summary>
+            <returns>A string representation of this object</returns>
+        </member>
+        <member name="T:Jsonite.JsonSettings">
+            <summary>
+            Defines serialization and deserialization settings used by <see cref="!:Json.Parse"/> and <see cref="M:Jsonite.Json.Serialize(System.Object,Jsonite.JsonSettings)"/>
+            </summary>
+        </member>
+        <member name="P:Jsonite.JsonSettings.MaxDepth">
+            <summary>
+            Gets or sets the maximum depth used when serializing or deserializing.
+            </summary>
+        </member>
+        <member name="P:Jsonite.JsonSettings.Indent">
+            <summary>
+            Gets or sets a value indicating to indent the text when serializing. Default is <c>false</c>.
+            </summary>
+        </member>
+        <member name="P:Jsonite.JsonSettings.IndentCount">
+            <summary>
+            Gets or sets the number of <see cref="P:Jsonite.JsonSettings.IndentChar"/> used to indent a json output when <see cref="P:Jsonite.JsonSettings.Indent"/> is <c>true</c>.
+            </summary>
+        </member>
+        <member name="P:Jsonite.JsonSettings.IndentChar">
+            <summary>
+            Gets or sets the indent character used when <see cref="P:Jsonite.JsonSettings.Indent"/> is <c>true</c>.
+            </summary>
+        </member>
+        <member name="P:Jsonite.JsonSettings.ParseFloatAsDecimal">
+            <summary>
+            Gets or sets a value indicating whether floats should be deserialized to decimal instead of double (default).
+            </summary>
+        </member>
+        <member name="P:Jsonite.JsonSettings.ParseValuesAsStrings">
+            <summary>
+            Gets or sets a value indicating whether all values should be deserialized to strings instead of numbers.
+            </summary>
+        </member>
+        <member name="P:Jsonite.JsonSettings.AllowTrailingCommas">
+            <summary>
+            Gets or sets a value indicating whether to allow trailing commas in object and array declaration.
+            </summary>
+        </member>
+        <member name="P:Jsonite.JsonSettings.Reflector">
+            <summary>
+            Gets or sets the reflector used for interfacing the json text to an object graph.
+            </summary>
+        </member>
+        <member name="T:Jsonite.IJsonReflector">
+            <summary>
+            A callback interface used during the serialization and deserialization.
+            </summary>
+        </member>
+        <member name="M:Jsonite.IJsonReflector.Initialize(Jsonite.JsonSettings)">
+            <summary>
+            Initializes this instance with the specified settings.
+            </summary>
+            <param name="settings">The settings.</param>
+        </member>
+        <member name="M:Jsonite.IJsonReflector.OnDeserializeEnterObject(System.Object,System.Type,System.Object@)">
+            <summary>
+            Called when starting to deserialize an object.
+            </summary>
+            <param name="obj">An existing object instance (may be null).</param>
+            <param name="expectedType">The expected type (not null).</param>
+            <param name="objectContext">The object context that will be passed to other deserialize methods for objects.</param>
+            <returns>The object instance to deserialize to. The return value must not be null. This instance can be the input <paramref name="obj"/> if not null, or this method could choose to replace the instance by another during the deserialization.</returns>
+        </member>
+        <member name="M:Jsonite.IJsonReflector.OnDeserializePrepareMemberForObject(System.Object,System.Object,System.String,System.Type@,System.Object@,System.Object@)">
+            <summary>
+            Called when deserializing a member, before deserializing its value.
+            </summary>
+            <param name="objectContext">The object context that was returned by the <see cref="M:Jsonite.IJsonReflector.OnDeserializeEnterObject(System.Object,System.Type,System.Object@)"/></param>
+            <param name="obj">The object instance (not null).</param>
+            <param name="member">The member name being deserialized.</param>
+            <param name="memberType">Expected type of the member.</param>
+            <param name="memberContext">The member context that will be passed back to <see cref="M:Jsonite.IJsonReflector.OnDeserializeSetObjectMember(System.Object,System.Object,System.Object,System.Object)"/>.</param>
+            <param name="existingMemberValue">The existing member value if any (may be null).</param>
+        </member>
+        <member name="M:Jsonite.IJsonReflector.OnDeserializeSetObjectMember(System.Object,System.Object,System.Object,System.Object)">
+            <summary>
+            Called when deserializing a member value to effectively set the value for the member on the specified object instance.
+            </summary>
+            <param name="objectContext">The object context that was returned by the <see cref="M:Jsonite.IJsonReflector.OnDeserializeEnterObject(System.Object,System.Type,System.Object@)"/></param>
+            <param name="obj">The object instance (not null).</param>
+            <param name="memberContext">The member context that was generated by <see cref="M:Jsonite.IJsonReflector.OnDeserializePrepareMemberForObject(System.Object,System.Object,System.String,System.Type@,System.Object@,System.Object@)"/>.</param>
+            <param name="value">The value of the member to set on the object.</param>
+        </member>
+        <member name="M:Jsonite.IJsonReflector.OnDeserializeExitObject(System.Object,System.Object)">
+            <summary>
+            Called when deserializing an object is done. This method allows to transform the object to another value.
+            </summary>
+            <param name="objectContext">The object context.</param>
+            <param name="obj">The object instance that has been deserialized.</param>
+            <returns>The final object deserialized (may be different from <paramref name="obj"/>)</returns>
+        </member>
+        <member name="M:Jsonite.IJsonReflector.OnDeserializeEnterArray(System.Object,System.Type,System.Type@,System.Object@)">
+            <summary>
+            Called when starting to deserialize an array.
+            </summary>
+            <param name="obj">An existing array instance (may be null).</param>
+            <param name="expectedType">The expected type of the array.</param>
+            <param name="expectedArrayTypeItem">The expected type of an array item.</param>
+            <param name="arrayContext">The array context that will be passed to other deserialize methods for arrays.</param>
+            <returns>The array instance to deserialize to. The return value must not be null.</returns>
+        </member>
+        <member name="M:Jsonite.IJsonReflector.OnDeserializeAddArrayItem(System.Object,System.Object,System.Int32,System.Object)">
+            <summary>
+            Called when deserializing an array item to add to the specified array instance.
+            </summary>
+            <param name="arrayContext">The array context that was returned by the <see cref="M:Jsonite.IJsonReflector.OnDeserializeEnterArray(System.Object,System.Type,System.Type@,System.Object@)"/></param>
+            <param name="array">The array being deserialized.</param>
+            <param name="index">The index of the next element (may be used for plain arrays).</param>
+            <param name="value">The value of the item to add to the array.</param>
+        </member>
+        <member name="M:Jsonite.IJsonReflector.OnDeserializeExitArray(System.Object,System.Object)">
+            <summary>
+            Called when deserializing an array is done. This method allows to transform the array to another value (transform a list to a plain .NET array for example)
+            </summary>
+            <param name="arrayContext">The array context that was returned by the <see cref="M:Jsonite.IJsonReflector.OnDeserializeEnterArray(System.Object,System.Type,System.Type@,System.Object@)"/></param>
+            <param name="obj">The array instance that has been deserialized.</param>
+            <returns>The final array instance deserialized (may be different from <paramref name="obj"/>)</returns>
+        </member>
+        <member name="M:Jsonite.IJsonReflector.OnDeserializeRaiseParsingError(System.Int32,System.Int32,System.Int32,System.String,System.Exception)">
+            <summary>
+            Called when an error occured when deserializing. A default implementation should throw a <see cref="T:Jsonite.JsonException"/>.
+            </summary>
+            <param name="offset">The character position from the begining of the buffer being deserialized.</param>
+            <param name="line">The line position (zero-based)</param>
+            <param name="column">The column position (zero-based)</param>
+            <param name="message">The error message.</param>
+            <param name="inner">An optional inner exception.</param>
+        </member>
+        <member name="M:Jsonite.IJsonReflector.OnSerializeGetObjectType(System.Object,System.Type,System.Object@)">
+            <summary>
+            Called when serializing an object, to determine whether the object is an array or a simple object (with members/properties). 
+            This method is then used to correctly route to <see cref="M:Jsonite.IJsonReflector.OnSerializeGetObjectMembers(System.Object,System.Object)"/> or <see cref="M:Jsonite.IJsonReflector.OnSerializeGetArrayItems(System.Object,System.Object)"/>.
+            </summary>
+            <param name="obj">The object instance being serialized</param>
+            <param name="type">The type of the object being serialized.</param>
+            <param name="objectContext">An object context that will be passed to other serialize methods.</param>
+            <returns>The type of the specified object instance (array or object or unknown)</returns>
+        </member>
+        <member name="M:Jsonite.IJsonReflector.OnSerializeGetObjectMembers(System.Object,System.Object)">
+            <summary>
+            Called when serializing an object to the members value of this object.
+            </summary>
+            <param name="objectContext">The object context that was returned by the <see cref="M:Jsonite.IJsonReflector.OnSerializeGetObjectType(System.Object,System.Type,System.Object@)"/></param>
+            <param name="obj">The object instance being serialized.</param>
+            <returns>An enumeration of members [name, value].</returns>
+        </member>
+        <member name="M:Jsonite.IJsonReflector.OnSerializeGetArrayItems(System.Object,System.Object)">
+            <summary>
+            Called when serializing an array to get the array items.
+            </summary>
+            <param name="objectContext">The object context that was returned by the <see cref="M:Jsonite.IJsonReflector.OnSerializeGetObjectType(System.Object,System.Type,System.Object@)"/></param>
+            <param name="array">The object instance being serialized.</param>
+            <returns>An enumeration of the array items to serialize.</returns>
+        </member>
+        <member name="T:Jsonite.JsonObjectType">
+            <summary>
+            Defines the type of object when serializing (returned by method <see cref="M:Jsonite.IJsonReflector.OnSerializeGetObjectType(System.Object,System.Type,System.Object@)"/>.
+            </summary>
+        </member>
+        <member name="F:Jsonite.JsonObjectType.Unknown">
+            <summary>
+            The object type being serialized is unkwown.
+            </summary>
+        </member>
+        <member name="F:Jsonite.JsonObjectType.Object">
+            <summary>
+            The object being serialized is an object with members.
+            </summary>
+        </member>
+        <member name="F:Jsonite.JsonObjectType.Array">
+            <summary>
+            The object being serialized is an array (providing <see cref="T:System.Collections.IEnumerable"/>)
+            </summary>
+        </member>
+        <member name="T:Jsonite.JsonReflectorDefault">
+            <summary>
+            The default implementation of <see cref="T:Jsonite.IJsonReflector"/> that allows to deserialize a JSON text to a generic <see cref="T:System.Collections.Generic.IDictionary`2"/> <see cref="T:Jsonite.JsonObject"/> or <see cref="T:Jsonite.JsonArray"/>.
+            </summary>
+            <seealso cref="T:Jsonite.IJsonReflector" />
+        </member>
+    </members>
+</doc>

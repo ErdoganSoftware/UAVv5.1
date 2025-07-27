@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Testing.Platform.MSBuild</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Testing.Platform.MSBuild.Resources.MSBuildResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.MSBuild.Resources.MSBuildResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.MSBuild.Resources.MSBuildResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.MSBuild.Resources.MSBuildResources.FailedTestDetail">
+            <summary>
+              Looks up a localized string similar to Failed test &apos;{0}&apos;, reason &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.MSBuild.Resources.MSBuildResources.InvalidTargetPath">
+            <summary>
+              Looks up a localized string similar to Invalid TargetPath, {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.MSBuild.Resources.MSBuildResources.RunTests">
+            <summary>
+              Looks up a localized string similar to Run tests: &apos;{0}&apos; [{1}|{2}].
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.MSBuild.Resources.MSBuildResources.TestFailed">
+            <summary>
+              Looks up a localized string similar to Tests failed: &apos;{0}&apos; [{1}|{2}].
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.MSBuild.Resources.MSBuildResources.TestFailedNoDetail">
+            <summary>
+              Looks up a localized string similar to Tests failed: {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Testing.Platform.MSBuild.Resources.MSBuildResources.TestsSucceeded">
+            <summary>
+              Looks up a localized string similar to Tests succeeded: &apos;{0}&apos; [{1}|{2}].
+            </summary>
+        </member>
+    </members>
+</doc>
